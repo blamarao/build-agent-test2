@@ -19,18 +19,21 @@ namespace build_agent_test2
 
         public class GlobalPosition
         {
-            private readonly string _latitude;
-            private readonly string _longitude;
-
+            //private readonly string _latitude;
+            //private readonly string _longitude;
+            private readonly (string, string) _coordinates;
+                 
             public string Position
             {
-                get => $"{_latitude}-{_longitude}";
+                //get => $"{_latitude}-{_longitude}";
+                get => $"{_coordinates.Item1}, {_coordinates.Item2}";
             }
 
             public GlobalPosition(string latitude, string longitude)
             {
-                _latitude = latitude;
-                _longitude = longitude;
+                //_latitude = latitude;
+                //_longitude = longitude;
+                _coordinates = (latitude, longitude);
             }
 
             public string PrintMe() => $"Your current position is {Position}";
@@ -39,7 +42,8 @@ namespace build_agent_test2
             {
                 Console.WriteLine(Hemisphere());
 
-                string Hemisphere() => _latitude.Split('-')[1].Equals("N") ? "Hemisfério Norte" : "Hemisfério Sul"; 
+                //string Hemisphere() => _latitude.Split('-')[1].Equals("N") ? "Hemisfério Norte" : "Hemisfério Sul"; 
+                string Hemisphere() => _coordinates.Item1.Split('-')[1].Equals("N") ? "Hemisfério Norte" : "Hemisfério Sul";
             }
         }
     }
