@@ -97,7 +97,6 @@ Task("Restore")
 Task("Build")
     .Description("Builds all the different parts of the project.")
     .IsDependentOn("Clean")
-    .IsDependentOn("Restore")
     .Does(() =>
 {
     // Build all solutions.
