@@ -7,12 +7,17 @@ namespace build_agent_test2
         static void Main(string[] args)
         {
             GlobalPosition position = new GlobalPosition("51.9233076-N","4.4794524-W");
+            GlobalPosition position2 = new GlobalPosition(51.9233076, 4.4794524);
 
             Console.WriteLine("Hello World!");
 
             Console.WriteLine(position.PrintMe());
 
             position.WhichHemisphere();
+
+            Console.WriteLine(position2.PrintMe());
+
+            position2.WhichHemisphere();
 
             Console.ReadLine();
         }
@@ -21,7 +26,7 @@ namespace build_agent_test2
         {
             //private readonly string _latitude;
             //private readonly string _longitude;
-            private readonly (string, string) _coordinates;
+            private readonly (object, object) _coordinates;
                  
             public string Position
             {
@@ -29,7 +34,7 @@ namespace build_agent_test2
                 get => $"{_coordinates.Item1}, {_coordinates.Item2}";
             }
 
-            public GlobalPosition(string latitude, string longitude)
+            public GlobalPosition(object latitude, object longitude)
             {
                 //_latitude = latitude;
                 //_longitude = longitude;
@@ -40,10 +45,19 @@ namespace build_agent_test2
 
             public void WhichHemisphere()
             {
-                Console.WriteLine(Hemisphere());
+                if (_coordinates.Item1 is string latitude)
+                {
+                    Console.WriteLine(Hemisphere(latitude));
+                }
+                else
+                {
+                    Console.WriteLine("Could not determine the Hemisphere");
+                }
 
+               
                 //string Hemisphere() => _latitude.Split('-')[1].Equals("N") ? "Hemisfério Norte" : "Hemisfério Sul"; 
-                string Hemisphere() => _coordinates.Item1.Split('-')[1].Equals("N") ? "Hemisfério Norte" : "Hemisfério Sul";
+                string Hemisphere (string data) => data.Split('-')[1].Equals("N") ? "North Hemisphere" : "South Hemisphere";
+                
             }
         }
     }
